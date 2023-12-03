@@ -1,0 +1,191 @@
+﻿@model IEnumerable<Switch_and_Shift.Models.PRODUCTS>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Posts</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Saira+Semi+Condensed:wght@300;400;500;600;700&family=Shadows+Into+Light&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/css/post.css" />
+</head>
+
+
+<body>
+
+
+    <div class="bs-example">
+        <nav class="navbar navbar-expand-md navbar-light bg-light">
+            <a href="#" class="navbar-brand logo">Switch And Shift</a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div id="navbarCollapse" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">POSTS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">INBOX</a>
+                    </li>
+
+
+                </ul>
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                            <img src="image/profile_user.png">
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a href="#" class="dropdown-item">My Profile</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="/log-out" class="dropdown-item logout" id="log-out">Log Out</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+    </div>
+
+
+
+    <h1>Find Your Products</h1>
+
+
+    <div id="spinner_id" class="loading" style="display: none;"></div>
+    <div class="section-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-4">
+
+                    <form method="get" asp-action="Index">
+
+
+                        <div class="section-1">
+
+
+                            <h3>Apply Filters</h3>
+
+                            <h4>District</h4>
+                            <div class="form-outline">
+                                <input type="search" id="form1" class="form-control" placeholder="Enter District"
+                                       aria-label="Search" />
+                            </div>
+
+                            <h4>Category</h4>
+                            <div class="form-outline">
+                                <input type="search" id="form1" class="form-control" placeholder="Product Category"
+                                       value="@ViewData["GetProductDetails"]" name="productSearch" aria-label="Search" />
+                            </div>
+
+
+                            <h4>Upper Range</h4>
+                            <div class="form-outline">
+                                <input type="number" id="form1" class="form-control" placeholder="Upper Range"
+                                       value="@ViewData["GetUpperRange"]" name="upperRange" aria-label="Search" />
+                            </div>
+
+                            <h4>Lower Range</h4>
+                            <div class="form-outline">
+                                <input type="number" id="form1" class="form-control" placeholder="Lower Range"
+                                       value="@ViewData["GetLowerRange"]" name="lowerRange" aria-label="Search" />
+                            </div>
+
+                            <button type="submit" value="Search" class="btn btn-warning  details-button" style="margin-top:25px">
+                                Search
+                            </button>
+
+
+                            <button asp-action="Index" type="submit" value="Clear Filters" class="btn btn-warning  details-button" style="margin-top:25px">
+                                Clear Filters
+                            </button>
+
+                        </div>
+                    </form>
+                </div>
+
+
+                <div class="col-lg-9 col-md-8 col-sm-8">
+
+                    @foreach (var item in Model)
+                    {
+                        <div class="section2">
+                            <div class="section2-product-details">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-5 col-sm-12 col-xs-12">
+                                            <div class="box2 box2-modified">
+                                                <img src="@("~/Image/"+item.image_name)" asp-append-version="true" style="height:auto; width:460px; max-height:500px" />
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-7 col-sm-12 col-xs-12">
+                                            <h2>@Html.DisplayFor(modelItem => item.product_brand)</h2>
+                                            <h4>@Html.DisplayFor(modelItem => item.product_model)</h4>
+                                            <div class="card mb-3">
+                                                <div class="card-body">
+
+                                                    <div class="row">
+                                                        <div class="col-sm-5">
+                                                            <h6 class="mb-0">Product Usage</h6>
+                                                        </div>
+                                                        <div class="col-sm-7 text-secondary">@Html.DisplayFor(modelItem => item.product_usage)</div>
+                                                    </div>
+                                                    <hr />
+                                                    <div class="row">
+                                                        <div class="col-sm-5">
+                                                            <h6 class="mb-0">Price : </h6>
+                                                        </div>
+                                                        <div class="col-sm-7 text-secondary">@Html.DisplayFor(modelItem => item.product_price)</div>
+                                                    </div>
+                                                    <hr />
+                                                    <div class="row">
+                                                        <div class="col-sm-5">
+                                                            <h6 class="mb-0">Post Date :</h6>
+                                                        </div>
+                                                        <div class="col-sm-7 text-secondary">28.8.2021</div>
+                                                    </div>
+                                                    <hr />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <form>
+                                        <a type="button" asp-action="Edit" class="btn btn-warning  details-button form-group" style="margin-top:30px" asp-route-id="@item.Product_ID">Edit</a>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!--JS--->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js"
+            integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG"
+            crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+﻿@model Switch_and_Shift.Models.ADMIN
+
+@{
+    ViewData["Title"] = "AdminLogIn";
+}
+
+<h1>Admin LogIn</h1>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AdminLogIn">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Admin_Name" class="control-label"></label>
+                <input asp-for="Admin_Name" class="form-control" />
+                <span asp-validation-for="Admin_Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Admin_Email" class="control-label"></label>
+                <input asp-for="Admin_Email" class="form-control" />
+                <span asp-validation-for="Admin_Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Admin_Password" class="control-label"></label>
+                <input asp-for="Admin_Password" class="form-control" />
+                <span asp-validation-for="Admin_Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Log in" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+

@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Switch_and_Shift.Models.USERS>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>User List</h1>
+
+<form method="get" asp-action="Index">
+    <p>
+        <input type="search" placeholder="Enter name" value="@ViewData["GetUserDetails"]" name="UserSearch" style="width:500px;" />
+        <input type="submit" value="Search" class="btn btn-primary" />
+        <a asp-action="Index">Get All Users</a>
+    </p>
+</form>
+
+
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LastName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.District)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Location)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Phone)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.District)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Location)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Phone)
+                        </td>
+                        <td>
+
+                            <a asp-action="Review" asp-route-id="@item.UserId">Review</a> |
+                            <a asp-action="Ban" asp-route-id="@item.UserId">Ban</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
